@@ -1,4 +1,5 @@
 SRC = *.sv
+SRC_RTL = ~/Documents/do-an2/vit_npu/rtl/*.sv
 TOP = tb_new
 
 # modelsim 
@@ -11,6 +12,8 @@ all: compile sim
 compile: 
 	@echo "Compiling Systolic Design..."
 	$(VLOG) $(SRC)
+	$(VLOG) $(SRC_RTL)
+
 
 sim: compile 
 	@echo "Running simulation... "
