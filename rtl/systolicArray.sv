@@ -13,7 +13,7 @@
 //`default_nettype none
 
 module systolicArray #(
-    parameter int unsigned N = 8
+    parameter int unsigned N = 16
 ) (
     input  logic                          i_clk,
     input  logic                          i_arst,
@@ -34,7 +34,7 @@ module systolicArray #(
   /* verilator lint_off UNUSED */
   genvar i, j;
 
-  for (i = 0; i < N; i++) begin : PerDummyRowColInterconnect
+  for (i = 0; i < N; i++) begin : gen_PerDummyRowColInterconnect
 
     // These are dummy interconnects used to pass data from the row matrices to
     // the i_a ports of PE in the first col.
@@ -44,10 +44,10 @@ module systolicArray #(
     // the i_b ports of PE in the first row.
     assign colInterConnect[0][i] = i_col[i][0];
 
-  end : PerDummyRowColInterconnect
+  end : gen_PerDummyRowColInterconnect
 
-  for (i = 0; i < N; i++) begin : PerRow
-    for (j = 0; j < N; j++) begin : PerCol
+  for (i = 0; i < N; i++) begin : gen_PerRow
+    for (j = 0; j < N; j++) begin : gen_PerCol
 
       pe u_pe (
           .i_clk,
@@ -59,8 +59,8 @@ module systolicArray #(
           .o_b(colInterConnect[i+1][j]),
           .o_y(o_c[i][j])
       );
-    end : PerCol
-  end : PerRow
+    end : gen_PerCol
+  end : gen_PerRow
 
 endmodule
 
