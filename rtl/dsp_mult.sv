@@ -1,10 +1,10 @@
 module dsp_mult #(
-    parameter BIT_WIDTH = 8
+    parameter int BIT_WIDTH = 16
 ) (
     input logic clk,
     input logic rst_n,
-    input  logic [  BIT_WIDTH-1:0] A,
-    input  logic [  BIT_WIDTH-1:0] B,
+    input logic [BIT_WIDTH-1:0] A,
+    input logic [BIT_WIDTH-1:0] B,
     output logic [2*BIT_WIDTH-1:0] Product
 );
 
